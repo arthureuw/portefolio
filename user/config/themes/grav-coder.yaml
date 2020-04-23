@@ -1,0 +1,29 @@
+enabled: true
+dropdown:
+  enabled: false
+navbar:
+  title: ARTHUR
+footer:
+  copyright: 'Arthur Leloup'
+  copyright_start_year: 2019
+post:
+  navigation: false
+pagination:
+  count: 10
+social:
+  github:
+    title: Github
+    url: 'https://gitlab.com/arthureuw'
+    icon: fa-github
+  twitter:
+    title: Twitter
+    url: '<url>'
+    icon: fa-twitter
+  linkedin:
+    title: LinkedIn
+    url: 'https://www.linkedin.com/in/arthurleloup/'
+    icon: fa-linkedin-in
+  stackoverflow:
+    title: StackOverflow
+    url: '<url>'
+    icon: fa-stack-overflow

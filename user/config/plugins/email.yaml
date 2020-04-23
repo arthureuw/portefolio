@@ -1,0 +1,29 @@
+enabled: true
+from: arthureuw@gmail.com
+from_name: arthureuw@gmail.com
+to: arthureuw@gmail.com
+to_name: 'Arthur LELOUP'
+queue:
+  enabled: true
+  flush_frequency: '* * * * *'
+  flush_msg_limit: 10
+  flush_time_limit: 100
+mailer:
+  engine: sendmail
+  smtp:
+    server: localhost
+    port: 25
+    encryption: none
+    user: null
+    password: null
+  sendmail:
+    bin: '/usr/sbin/sendmail -bs'
+content_type: text/html
+debug: true
+charset: null
+cc: null
+cc_name: null
+bcc: null
+reply_to: null
+reply_to_name: null
+body: null
