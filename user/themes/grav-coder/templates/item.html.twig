@@ -1,0 +1,57 @@
+{% extends 'partials/base.html.twig' %}
+{% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page'))) %}
+{% set pageCollection = page.parent.children() %}
+
+{% block body %}
+<section class="container post">
+    <article>
+        <header class="page-header">
+            <div class="page-title">
+                <h1 class="title">{{ page.title }}</h1>
+            </div>
+            <div class="page-meta">
+                <span class="posted-on">
+                    <i class="far fa-calendar"></i>
+                    <time datetime='{{ page.date|date("c") }}'>
+                        {{ page.date|date(system.pages.dateformat.short) }}
+                    </time>
+                </span>
+            </div>
+        </header>
+
+        <div class="page-content">
+            {{ page.content }}
+        </div>
+
+        <br/>
+        {% if page.taxonomy.category %}
+            <div class="categories">
+                <i class="fas fa-folder"></i>
+                {% for category in page.taxonomy.category %}
+                   <a href="{{ site.blog.route }}/category:{{ category }}">{{ category }}</a>{% if not loop.last %},{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {# Show navigation if enabled, defaults to true #}
+        {% if theme_config.post.navigation %}
+            <footer class="page-footer">
+                <div>
+                    {% if not pageCollection.isLast(page.path) %}
+                        <div class="float-left">
+                            <i class="far fa-hand-point-left"></i> <a href="{{ pageCollection.prevSibling(page.path).url }}">Previous Article</a>
+                        </div>
+                    {% endif %}
+                    {% if not pageCollection.isFirst(page.path) %}
+                        <div class="float-right">
+                            <a href="{{ pageCollection.nextSibling(page.path).url }}">Next Article</a> <i class="far fa-hand-point-right"></i>
+                        </div>
+                    {% endif %}
+                </div>
+            </footer>
+        {% endif %}
+
+    </article>
+</section>
+
+{% endblock %}
