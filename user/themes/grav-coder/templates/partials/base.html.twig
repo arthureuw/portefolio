@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="{{ grav.language.getActive ?: theme_config.default_lang }}">
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include 'partials/metadata.html.twig' %}
@@ -27,53 +27,58 @@
 
     <link rel="icon" type="image/png" href="{{ url('theme://images/favicon-16x16.png') }}" sizes="16x16">
     <link rel="icon" type="image/png" href="{{ url('theme://images/favicon-32x32.png') }}" sizes="32x32">
-  </head>
+</head>
 
-  <body class="">
-    <main class="wrapper">
-      <nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+<body class="">
+<div id="particles-js"></div>
+
+<main class="wrapper">
+    <nav id="navigation" class="navbar navbar-default navbar-fixed-top">
         <section class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed float-right" data-toggle="collapse" data-target="#navbar-menu">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand float-left" href="{{ home_url }}">
-              {{ theme_config.navbar.title }}
-            </a>
-          </div>
-          {% block header_navigation %}
-            <div class="collapse navbar-collapse" id="navbar-menu">
-              {% include 'partials/navigation.html.twig' %}
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed float-right" data-toggle="collapse"
+                        data-target="#navbar-menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand float-left" href="{{ home_url }}">
+                    {{ theme_config.navbar.title }}
+                </a>
             </div>
-          {% endblock %}
+            {% block header_navigation %}
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    {% include 'partials/navigation.html.twig' %}
+                </div>
+            {% endblock %}
         </section>
-      </nav>
+    </nav>
 
-      <div class="content">
+    <div class="content">
         {% block body %}
-          <section class="container centered">
-            {% block content %}{% endblock %}
-          </section>
+            <section class="container centered">
+                {% block content %}{% endblock %}
+            </section>
         {% endblock %}
-      </div>
+    </div>
 
-      {% block footer %}
+    {% block footer %}
         <footer class="footer">
-          {% include 'partials/footer.html.twig' %}
+            {% include 'partials/footer.html.twig' %}
         </footer>
-      {% endblock %}
-
-    </main>
-
-    {% block javascripts %}
-        {% do assets.addJs('theme://js/jquery-slim.min.js', 100) %}
-        {% do assets.addJs('theme://js/bootstrap.min.js', 99) %}
-        {% do assets.addJs('theme://js/main.min.js', 98) %}
     {% endblock %}
-    {{ assets.js() }}
 
-  </body>
+</main>
+
+{% block javascripts %}
+    {% do assets.addJs('theme://js/jquery-slim.min.js', 100) %}
+    {% do assets.addJs('theme://js/bootstrap.min.js', 99) %}
+    {% do assets.addJs('theme://js/main.min.js', 98) %}
+    {% do assets.addJs('theme://js/particles.min.js', 97) %}
+    {% do assets.addJs('theme://js/particle.js', 96) %}
+{% endblock %}
+{{ assets.js() }}
+
+</body>
 </html>

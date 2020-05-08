@@ -5,7 +5,7 @@ navbar:
   title: ARTHUR
 footer:
   copyright: 'Arthur Leloup'
-  copyright_start_year: 2019
+#  copyright_start_year: 2019
 post:
   navigation: false
 pagination:
@@ -13,7 +13,7 @@ pagination:
 social:
   github:
     title: Github
-    url: 'https://gitlab.com/arthureuw'
+    url: 'https://github.com/arthureuw/'
     icon: fa-github
   twitter:
     title: Twitter
