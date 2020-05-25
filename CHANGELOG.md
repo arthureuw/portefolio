@@ -1,3 +1,18 @@
+# v1.6.25
+## 05/14/2020
+
+1. [](#improved)
+    * Added system configuration support for `HTTP_X_Forwarded` headers (host disabled by default)
+    * Updated `PHPUserAgentParser` to 1.0.0
+    * Bump `Go` to version 1.13 in `travis.yaml`
+
+# v1.6.24
+## 04/27/2020
+
+1. [](#improved)
+    * Added support for `X-Forwarded-Host` [#2891](https://github.com/getgrav/grav/pull/2891)
+    * Disable XDebug in Travis builds
+
 # v1.6.23
 ## 03/19/2020
 

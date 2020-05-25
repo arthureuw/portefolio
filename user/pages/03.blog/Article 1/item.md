@@ -1,29 +1,86 @@
 ---
-title: 'Deploying a secure Grav CMS on DigitalOcean'
-published: true
-date: '22-04-2020 16:12'
+title: 'Angular : Build Reactive Forms with Bootstrap 4'
 ---
 
-Grav is a modern flat-file CMS that lets you a great looking CMS up and running in no time and you don’t have to be a CMS expert to do it.
+First of all i'm going to add `ReactiveFormsModule` in the `app.module.ts`
 
-Grav is easy and with a decent markdown editor almost anyone can create great looking CMSes with it. But it is a different story when it comes to host them esp. on VPSes such as DigitalOcean, Vultr, Linode, OVH, AWS etc. You not only have to understand how to spin off a robust server but also have to worry about how to make it secure. And that’s the easiest part!
+```javascript
+import { ReactiveFormsModule } from '@angular/forms';
 
-Even if you have a secure server running, how do you make your website secure? Of course, encrypting it with SSL/TLS certificates! But they are neither cheap nor easy to set up.
+@NgModule({
+  declarations: [...],
+  imports: [
+    ReactiveFormsModule
+  ],
+  bootstrap: [...]
+})
 
-Even if you thought that these are just one-time thing you have to do and spent a few hours getting everything properly configured, you still have to worry about deployments.
+export class AppModule { }
+```  
+---
+Then i create a form with **Bootstrap 4** and **Reactive Forms APIs** in the `app/form.component.html.
 
-Grav comes with an optional admin plugin that allows you to quickly create contents and perform other admin tasks, just like good old WordPress. But you most probably want to write the contents locally, play with new plugins locally, proof-read, make sure everything is great to go and only then sync them all. You for sure don’t want to make changes to your live CMS on the fly.
+```html
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="form-group input-group-lg">
+      <input class="form-control" placeholder="McDonald's" formControlName="name">
+    </div>
 
-Making sure you have all the above concerns adequately addressed and created an environment to painlessly deploy your CMS, is going to cost you hours if not days. And then you still have to worry about whether you configured everything correctly or not. Scary isn’t it?
+    <div class="form-group input-group-lg">
+      <input class="form-control" placeholder="Fast Food" formControlName="type">
+    </div>
 
-But, fear not! Cleaver is here to rescue you from spending your valuable hours on something you are not good at and don’t even care — being a DevOps!
+    <div class="form-group">
+      <button class="btn btn-danger btn-block btn-lg">Create</button>
+    </div>
+  </form>
+</div>
+```  
+---
+Next step will be in the `app/form.component.ts` file, i add the following code :
+```typescript 
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from "@angular/forms";
 
-With Cleaver, you can have a robust and secure Grav CMS running in about 5 minutes! Let’s see how easy it is to do it.
+@Component({
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
+})
 
-## Step 1: Adding an API key of your server provider
+export class FormComponent implements OnInit {
+  form: FormGroup;
 
-Cleaver currently supports 📖 DigitalOcean and 📖 Vultr. Go to your server provider’s dashboard and copy the API key to Cleaver.
+  constructor(public fb: FormBuilder) {
+    this.form = this.fb.group({
+      name: [''],
+      type: ['']
+    })
+  }
 
-Follow these quick steps:
-* 🎬 [DigitalOcean](https://www.youtube.com/watch?v=9EKtO_KfQvc)
-* 🎬[Vultr](https://www.youtube.com/watch?v=x80xhiAS7Ro)
+  ngOnInit() { }
+
+  submitForm() {
+    console.log(this.form.value)
+  }
+
+}
+```
+---   
+#### Uploading picture with your brand new form ?  
+
+If you want to Upload picture from your form you'll just have to add the next line to your `form.component.ts`
+```typescript
+  uploadFile(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({
+      avatar: file
+    });
+    this.form.get('avatar').updateValueAndValidity()
+  }
+```
+and this to your `form.component.html`.
+```html
+<input type="file" (change)="uploadFile($event)">
+```
